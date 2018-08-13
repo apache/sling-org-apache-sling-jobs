@@ -21,12 +21,11 @@ package org.apache.sling.jobs.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobBuilder;
 import org.apache.sling.jobs.Types;
 import org.apache.sling.jobs.impl.spi.JobStarter;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Provides an implementation of a JobBuilder.
@@ -49,14 +48,14 @@ public class JobBuilderImpl implements JobBuilder {
     }
 
 
-    @Nonnull
+    @NotNull
     @Override
-    public JobBuilder addProperties(@Nonnull Map<String, Object> props) {
+    public JobBuilder addProperties(@NotNull Map<String, Object> props) {
         this.properties.putAll(props);
         return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Job add() {
         return jobStarter.start(new JobImpl(topic, id, jobType, properties));

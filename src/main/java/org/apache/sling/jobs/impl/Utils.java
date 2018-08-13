@@ -28,10 +28,9 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.sling.jobs.impl.spi.MapValueAdapter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +48,7 @@ public class Utils {
      * Gets a string
      * @return
      */
-    @Nonnull
+    @NotNull
     private static String generateUniqueNamespace() {
         String macAddress = null;
         // get the MAC address of the primary interface, failing that use a fake.
@@ -88,8 +87,8 @@ public class Utils {
         return  baseId;
     }
 
-    @Nonnull
-    private static String tohex(@Nonnull byte[] bytes) {
+    @NotNull
+    private static String tohex(@NotNull byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for( byte b : bytes) {
             sb.append(String.format("%02x",b));
@@ -101,7 +100,7 @@ public class Utils {
      * Generate an ID based on the unique name of the jvm process and a counter.
      * @return a generated ID.
      */
-    @Nonnull
+    @NotNull
     public static String generateId() {
         try {
             return Utils.tohex(MessageDigest.getInstance("SHA1").digest((Utils.PROCESS_NAME+idCounter.incrementAndGet()).getBytes(UTF8)));
@@ -110,8 +109,8 @@ public class Utils {
         }
     }
 
-    @Nonnull
-    public static Map<String, Object> toMapValue(@Nonnull Object msg) {
+    @NotNull
+    public static Map<String, Object> toMapValue(@NotNull Object msg) {
         if (msg instanceof Map) {
             //noinspection unchecked
             return (Map<String, Object>) msg;
@@ -122,8 +121,8 @@ public class Utils {
     }
 
 
-    @Nonnull
-    public static <T> T getRequired(@Nonnull Map<String, Object> m, @Nonnull String name) {
+    @NotNull
+    public static <T> T getRequired(@NotNull Map<String, Object> m, @NotNull String name) {
         if (m.containsKey(name)) {
             //noinspection unchecked
             if ( m.get(name) != null) {
@@ -134,7 +133,7 @@ public class Utils {
     }
 
     @Nullable
-    public static <T> T getOptional(@Nonnull Map<String, Object> m, @Nonnull String name, @Nullable T defaultValue) {
+    public static <T> T getOptional(@NotNull Map<String, Object> m, @NotNull String name, @Nullable T defaultValue) {
         if (m.containsKey(name)) {
             //noinspection unchecked
             Object o = m.get(name);

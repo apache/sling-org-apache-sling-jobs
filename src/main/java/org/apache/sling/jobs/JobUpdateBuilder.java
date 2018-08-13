@@ -19,22 +19,21 @@
 
 package org.apache.sling.jobs;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.osgi.annotation.versioning.ProviderType;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Map;
-
 /**
  * Create a job update ading properties and building.
  */
 @ProviderType
 public interface JobUpdateBuilder {
 
-    @Nonnull
-    JobUpdateBuilder command(@Nonnull JobUpdate.JobUpdateCommand command);
+    @NotNull
+    JobUpdateBuilder command(@NotNull JobUpdate.JobUpdateCommand command);
 
-    @Nonnull
+    @NotNull
     JobUpdate build();
 
     /**
@@ -43,9 +42,9 @@ public interface JobUpdateBuilder {
      * @param value the value of the property which may be null. To remove the property set the value to JobUpdate.JobPropertyAction.REMOVE.
      * @return this JobBuilder instance.
      */
-    @Nonnull
-    JobUpdateBuilder put(@Nonnull String name, @Nullable Object value);
+    @NotNull
+    JobUpdateBuilder put(@NotNull String name, @Nullable Object value);
 
-    @Nonnull
-    JobUpdateBuilder putAll(@Nonnull Map<String, Object> properties);
+    @NotNull
+    JobUpdateBuilder putAll(@NotNull Map<String, Object> properties);
 }

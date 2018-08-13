@@ -19,11 +19,10 @@
 package org.apache.sling.jobs;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.osgi.annotation.versioning.ProviderType;
 
-import javax.annotation.Nonnull;
 import java.util.Map;
-
 /**
  * A JobBuilder allows users of the JobSystem to modify the properties of the Job and submit it for processing.
  */
@@ -35,14 +34,14 @@ public interface JobBuilder {
      * @param props The properties of the job. All values must be {@code java.io.Serializable}.
      * @return The job builder to continue building.
      */
-    @Nonnull
-    JobBuilder addProperties(@Nonnull Map<String, Object> props);
+    @NotNull
+    JobBuilder addProperties(@NotNull Map<String, Object> props);
 
     /**
      * Add the job for processing.
      * @return The job or <code>null</code>
      */
-    @Nonnull
+    @NotNull
     Job add();
 
 }

@@ -18,9 +18,8 @@
  */
 package org.apache.sling.jobs;
 
+import org.jetbrains.annotations.NotNull;
 import org.osgi.annotation.versioning.ProviderType;
-
-import javax.annotation.Nonnull;
 
 /**
  * An interface to allow a component, normally a JobConsumer to inspect a JobType and indicate that
@@ -35,5 +34,5 @@ public interface JobTypeValve {
      * @param jobType the job type.
      * @return true if can be processed.
      */
-    boolean accept(@Nonnull Types.JobType jobType);
+    boolean accept(@NotNull Types.JobType jobType);
 }

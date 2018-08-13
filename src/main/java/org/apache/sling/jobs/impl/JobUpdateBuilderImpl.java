@@ -22,12 +22,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobUpdate;
 import org.apache.sling.jobs.JobUpdateBuilder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  */
@@ -42,12 +41,12 @@ public class JobUpdateBuilderImpl implements JobUpdateBuilder {
      * Create a JobUpdateBuilder from a job.
      * @param job the job.
      */
-    public JobUpdateBuilderImpl(@Nonnull Job job) {
+    public JobUpdateBuilderImpl(@NotNull Job job) {
         this.job = job;
         this.jobId = null;
     }
 
-    public JobUpdateBuilderImpl(@Nonnull String jobId) {
+    public JobUpdateBuilderImpl(@NotNull String jobId) {
         this.jobId = jobId;
         this.job = null;
 
@@ -58,9 +57,9 @@ public class JobUpdateBuilderImpl implements JobUpdateBuilder {
      * @param command the command.
      * @return this JobBuilder instance.
      */
-    @Nonnull
+    @NotNull
     @Override
-    public JobUpdateBuilder command(@Nonnull JobUpdate.JobUpdateCommand command) {
+    public JobUpdateBuilder command(@NotNull JobUpdate.JobUpdateCommand command) {
         this.command = command;
         return this;
     }
@@ -71,9 +70,9 @@ public class JobUpdateBuilderImpl implements JobUpdateBuilder {
      * @param value the value of the property which may be null. To remove the property set the value to JobUpdate.JobPropertyAction.REMOVE.
      * @return this JobBuilder instance.
      */
-    @Nonnull
+    @NotNull
     @Override
-    public JobUpdateBuilder put(@Nonnull String name, @Nullable Object value) {
+    public JobUpdateBuilder put(@NotNull String name, @Nullable Object value) {
         if ( value == null) {
             this.updateProperties.put(name, JobUpdate.JobPropertyAction.REMOVE);
         } else {
@@ -82,9 +81,9 @@ public class JobUpdateBuilderImpl implements JobUpdateBuilder {
         return this;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public JobUpdateBuilder putAll(@Nonnull Map<String, Object> properties) {
+    public JobUpdateBuilder putAll(@NotNull Map<String, Object> properties) {
         this.updateProperties.putAll(properties);
         return this;
     }
@@ -94,7 +93,7 @@ public class JobUpdateBuilderImpl implements JobUpdateBuilder {
      * Build the JobUpdate.
      * @return the JobUpdate.
      */
-    @Nonnull
+    @NotNull
     @Override
     public JobUpdate build() {
         if ( job != null) {

@@ -20,10 +20,9 @@
 package org.apache.sling.jobs.impl.spi;
 
 import org.apache.sling.jobs.Job;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.osgi.annotation.versioning.ProviderType;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Provides JobStorage local to the JVM. Implementation may or may not decide to persist over restarts, page, etc
@@ -38,15 +37,15 @@ public interface JobStorage {
      * @return the job or null of the job doesn't exist.
      */
     @Nullable
-    Job get(@Nonnull String jobId);
+    Job get(@NotNull String jobId);
 
     /**
      * Put a Job into the Job Storage.
      * @param job the job.
      * @return the job just added.
      */
-    @Nonnull
-    Job put(@Nonnull Job job);
+    @NotNull
+    Job put(@NotNull Job job);
 
     /**
      * Remove the Job
@@ -54,7 +53,7 @@ public interface JobStorage {
      * @return the job removed or null if not present.
      */
     @Nullable
-    Job remove(@Nonnull String jobId);
+    Job remove(@NotNull String jobId);
 
     /**
      * Remove the Job, returning the job removed.
@@ -62,7 +61,7 @@ public interface JobStorage {
      * @return the job removed, if the the job was present, otherwise null.
      */
     @Nullable
-    Job remove(@Nonnull Job job);
+    Job remove(@NotNull Job job);
 
     /**
      * Dispose of the JobStorage.

@@ -18,9 +18,8 @@
  */
 package org.apache.sling.jobs;
 
+import org.jetbrains.annotations.NotNull;
 import org.osgi.annotation.versioning.ProviderType;
-
-import javax.annotation.Nonnull;
 
 /**
  * Listens for JobUpdate messages.
@@ -33,5 +32,5 @@ public interface JobUpdateListener {
      * Update the job state with a message.
      * @param update update message.
      */
-    void update(@Nonnull JobUpdate update);
+    void update(@NotNull JobUpdate update);
 }

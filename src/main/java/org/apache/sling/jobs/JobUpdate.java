@@ -20,9 +20,8 @@ package org.apache.sling.jobs;
 
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
@@ -65,7 +64,7 @@ public interface JobUpdate {
      * execute the Job.
      * @return the job type.
      */
-    @Nonnull
+    @NotNull
     Types.JobType getJobType();
 
     enum JobUpdateCommand {
@@ -85,7 +84,7 @@ public interface JobUpdate {
     /**
      * @return the type of update.
      */
-    @Nonnull
+    @NotNull
     JobUpdateCommand  getCommand();
 
 
@@ -93,21 +92,21 @@ public interface JobUpdate {
      * The job queue. - immutable.
      * @return The job queue
      */
-    @Nonnull
+    @NotNull
     Types.JobQueue getQueue();
 
     /**
      * Unique job ID. immutable.
      * @return The unique job ID.
      */
-    @Nonnull
+    @NotNull
     String getId();
 
     /**
      *
      * @return the new state of the job, may not have changed from the old state.
      */
-    @Nonnull
+    @NotNull
     Job.JobState getState();
 
     enum JobPropertyAction {
@@ -119,7 +118,7 @@ public interface JobUpdate {
      * Property types cant be changed in 1 message.
      * @return the map of property changes, will be <code>null</code> if the update message does not contain property changes.
      */
-    @Nonnull
+    @NotNull
     Map<String, Object> getProperties();
 
     /**

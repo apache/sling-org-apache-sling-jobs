@@ -18,9 +18,6 @@
  */
 package org.apache.sling.jobs.impl;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobBuilder;
 import org.apache.sling.jobs.JobManager;
@@ -29,6 +26,8 @@ import org.apache.sling.jobs.JobUpdateListener;
 import org.apache.sling.jobs.Types;
 import org.apache.sling.jobs.impl.spi.JobStarter;
 import org.apache.sling.jobs.impl.spi.JobStorage;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Implements a JobManager, storing Jobs in a JobStorage implementation.
@@ -60,20 +59,20 @@ public  class JobManagerImpl implements JobManager, JobStarter, JobUpdateListene
         this.messageSender = messageSender;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public JobBuilder newJobBuilder(@Nonnull Types.JobQueue queue, @Nonnull Types.JobType jobType) {
+    public JobBuilder newJobBuilder(@NotNull Types.JobQueue queue, @NotNull Types.JobType jobType) {
         return new JobBuilderImpl(this, queue, jobType);
     }
 
     @Nullable
     @Override
-    public Job getJobById(@Nonnull String jobId) {
+    public Job getJobById(@NotNull String jobId) {
         return jobStorage.get(jobId);
     }
 
     @Override
-    public void stopJobById(@Nonnull String jobId) {
+    public void stopJobById(@NotNull String jobId) {
         Job job = getJobById(jobId);
         if ( job != null) {
             messageSender.update(job.newJobUpdateBuilder().command(JobUpdate.JobUpdateCommand.STOP_JOB).build());
@@ -81,7 +80,7 @@ public  class JobManagerImpl implements JobManager, JobStarter, JobUpdateListene
     }
 
     @Override
-    public boolean abortJob(@Nonnull String jobId) {
+    public boolean abortJob(@NotNull String jobId) {
         Job job = getJobById(jobId);
         if ( job != null) {
             messageSender.update(job.newJobUpdateBuilder().command(JobUpdate.JobUpdateCommand.ABORT_JOB).build());
@@ -94,7 +93,7 @@ public  class JobManagerImpl implements JobManager, JobStarter, JobUpdateListene
 
     @Nullable
     @Override
-    public Job retryJobById(@Nonnull String jobId) {
+    public Job retryJobById(@NotNull String jobId) {
         Job job = getJobById(jobId);
         if (job != null) {
             messageSender.update(job.newJobUpdateBuilder().command(JobUpdate.JobUpdateCommand.RETRY_JOB).build());
@@ -112,7 +111,7 @@ public  class JobManagerImpl implements JobManager, JobStarter, JobUpdateListene
 
 
     @Override
-    public void update(@Nonnull JobUpdate update) {
+    public void update(@NotNull JobUpdate update) {
         Job j = jobStorage.get(update.getId());
         if ( j instanceof JobUpdateListener ) {
             ((JobUpdateListener) j).update(update);

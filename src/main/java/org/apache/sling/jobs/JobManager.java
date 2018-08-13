@@ -18,9 +18,8 @@
  */
 package org.apache.sling.jobs;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
@@ -40,8 +39,8 @@ public interface JobManager {
      *                 process the job.
      * @return A job builder
      */
-    @Nonnull
-    JobBuilder newJobBuilder(@Nonnull Types.JobQueue queue, @Nonnull Types.JobType jobType);
+    @NotNull
+    JobBuilder newJobBuilder(@NotNull Types.JobQueue queue, @NotNull Types.JobType jobType);
 
     /**
      * Return a job based on the unique id.
@@ -54,7 +53,7 @@ public interface JobManager {
      */
 
     @Nullable
-    Job getJobById(@Nonnull String jobId);
+    Job getJobById(@NotNull String jobId);
 
 
     /**
@@ -79,7 +78,7 @@ public interface JobManager {
      *                    must match the template (AND query).
      * @return A job or <code>null</code>
      *    @Nullable
-     * Job getJob(@Nonnull Types.JobQueue queue, @Nonnull Map<String, Object> template);
+     * Job getJob(@NotNull Types.JobQueue queue, @NotNull Map<String, Object> template);
      *
      */
 
@@ -128,8 +127,8 @@ public interface JobManager {
      *                    must match the template (AND query). By providing several maps, different filters
      *                    are possible (OR query).
      * @return A collection of jobs - the collection might be empty.
-     *    @Nonnull
-     *  Collection<Job> findJobs(@Nonnull QueryType type, @Nonnull Types.JobQueue queue, long limit, @Nullable Map<String, Object>... templates);
+     *    @NotNull
+     *  Collection<Job> findJobs(@NotNull QueryType type, @NotNull Types.JobQueue queue, long limit, @Nullable Map<String, Object>... templates);
      */
 
     /**
@@ -139,7 +138,7 @@ public interface JobManager {
      * permanently failed or being retried.
      * @param jobId the job id to stop.
      */
-    void stopJobById(@Nonnull String jobId);
+    void stopJobById(@NotNull String jobId);
 
     /**
      * Aborts a job by sending an abort message, may or may not be successful.
@@ -149,7 +148,7 @@ public interface JobManager {
      * @return <code>true</code> if the job could be removed or does not exist anymore.
      *         <code>false</code> if the job is not know to the job manager, however the abort message should be sent anyway.
      */
-    boolean abortJob(@Nonnull String jobId);
+    boolean abortJob(@NotNull String jobId);
 
 
     /**
@@ -161,7 +160,7 @@ public interface JobManager {
      * @return If the job is requeued, the new job object otherwise <code>null</code>
      */
     @Nullable
-    Job retryJobById(@Nonnull String jobId);
+    Job retryJobById(@NotNull String jobId);
 
 
 }

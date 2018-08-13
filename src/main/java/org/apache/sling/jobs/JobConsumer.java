@@ -19,9 +19,8 @@
 package org.apache.sling.jobs;
 
 
+import org.jetbrains.annotations.NotNull;
 import org.osgi.annotation.versioning.ProviderType;
-
-import javax.annotation.Nonnull;
 
 /**
  * Components that implement JobConsumers are registered with the Job Sub System by an OSGi Whiteboard pattern. Once
@@ -45,6 +44,6 @@ public interface JobConsumer {
      * @param callback called when the job is completed.
      * @throws RuntimeException or any subclass when the Job offered in initialState cant be accepted for execution.
      */
-    @Nonnull
-    void execute(@Nonnull Job initialState, @Nonnull JobUpdateListener listener, @Nonnull JobCallback callback);
+    @NotNull
+    void execute(@NotNull Job initialState, @NotNull JobUpdateListener listener, @NotNull JobCallback callback);
 }

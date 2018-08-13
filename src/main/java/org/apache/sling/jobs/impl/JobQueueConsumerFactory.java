@@ -23,8 +23,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobCallback;
 import org.apache.sling.jobs.JobConsumer;
@@ -37,6 +35,7 @@ import org.apache.sling.mom.QueueReader;
 import org.apache.sling.mom.RequeueMessageException;
 import org.apache.sling.mom.TopicManager;
 import org.apache.sling.mom.Types;
+import org.jetbrains.annotations.NotNull;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
@@ -91,7 +90,7 @@ public class JobQueueConsumerFactory implements QueueReader, MessageFilter {
 
         ((JobConsumer)jobManager).execute(job, new JobUpdateListener() {
             @Override
-            public void update(@Nonnull JobUpdate update) {
+            public void update(@NotNull JobUpdate update) {
                 if (update.getId() != job.getId() || !ALLOWED_COMMANDS.contains(update.getCommand())) {
 
                     throw new IllegalArgumentException("Not allowed to update other jobs or issue reserved commands when updating the state of a running job.");

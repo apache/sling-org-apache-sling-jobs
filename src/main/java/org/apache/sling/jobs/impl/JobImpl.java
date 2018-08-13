@@ -21,15 +21,14 @@ package org.apache.sling.jobs.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobController;
 import org.apache.sling.jobs.JobUpdate;
 import org.apache.sling.jobs.JobUpdateBuilder;
 import org.apache.sling.jobs.JobUpdateListener;
 import org.apache.sling.jobs.Types;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * JobImpl is a data object to hold the current state of the job in the current JVM as loaded into memory.
@@ -50,7 +49,7 @@ public class JobImpl implements Job, JobUpdateListener {
     private JobController jobController;
     private Types.JobType jobType;
 
-    public JobImpl(@Nonnull Types.JobQueue jobQueue, @Nonnull String id, @Nonnull Types.JobType jobType, @Nonnull Map<String, Object> properties) {
+    public JobImpl(@NotNull Types.JobQueue jobQueue, @NotNull String id, @NotNull Types.JobType jobType, @NotNull Map<String, Object> properties) {
         this.jobQueue = jobQueue;
         this.jobType = jobType;
         this.id = id;
@@ -67,25 +66,25 @@ public class JobImpl implements Job, JobUpdateListener {
         updateProperties(update.getProperties());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Types.JobQueue getQueue() {
         return jobQueue;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public String getId() {
         return id;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Types.JobType getJobType() {
         return jobType;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Map<String, Object> getProperties() {
         return properties;
@@ -111,14 +110,14 @@ public class JobImpl implements Job, JobUpdateListener {
         return createdAt;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public JobState getJobState() {
         return jobState;
     }
 
     @Override
-    public void setState(@Nonnull JobState newState) {
+    public void setState(@NotNull JobState newState) {
         jobState = newState;
     }
 
@@ -141,7 +140,7 @@ public class JobImpl implements Job, JobUpdateListener {
     }
 
     @Override
-    public void setJobController(@Nonnull JobController jobController) {
+    public void setJobController(@NotNull JobController jobController) {
         this.jobController = jobController;
     }
 
@@ -155,7 +154,7 @@ public class JobImpl implements Job, JobUpdateListener {
      * @param jobUpdate job update.
      */
     @Override
-    public void update(@Nonnull JobUpdate jobUpdate) {
+    public void update(@NotNull JobUpdate jobUpdate) {
         if  ( id.equals(jobUpdate.getId()) && ( jobQueue == Types.ANY_JOB_QUEUE || jobQueue.equals(jobUpdate.getQueue()))) {
             // Start Job commands always go onto a queue and dont expire.
             if ( jobUpdate.getCommand() != JobUpdate.JobUpdateCommand.START_JOB && jobUpdate.expires() < System.currentTimeMillis()) {
@@ -206,7 +205,7 @@ public class JobImpl implements Job, JobUpdateListener {
      * Update the properties taking into account any PropertyActions required.
      * @param properties the update properties.
      */
-    private void updateProperties(@Nonnull Map<String, Object> properties) {
+    private void updateProperties(@NotNull Map<String, Object> properties) {
         if ( properties == null ) {
             throw new IllegalArgumentException("Properties cant be null.");
         }
@@ -227,7 +226,7 @@ public class JobImpl implements Job, JobUpdateListener {
      * Update the jobstate data for the job.
      * @param jobUpdate
      */
-    private void updateState(@Nonnull JobUpdate jobUpdate) {
+    private void updateState(@NotNull JobUpdate jobUpdate) {
         retryCount = jobUpdate.getRetryCount();
         jobType = jobUpdate.getJobType();
         numberOfRetries = jobUpdate.getNumberOfRetries();
@@ -242,7 +241,7 @@ public class JobImpl implements Job, JobUpdateListener {
      * Get a JobUpdateBuilder for this Job.
      * @return the job update builder.
      */
-    @Nonnull
+    @NotNull
     @Override
     public JobUpdateBuilder newJobUpdateBuilder() {
         return new JobUpdateBuilderImpl(this);

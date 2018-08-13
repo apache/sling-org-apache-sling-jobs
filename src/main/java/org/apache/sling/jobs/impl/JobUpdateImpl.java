@@ -22,13 +22,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobUpdate;
 import org.apache.sling.jobs.Types;
 import org.apache.sling.jobs.impl.spi.MapValueAdapter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents messages sent to the Job via a message queue.
@@ -60,7 +59,7 @@ public class JobUpdateImpl implements MapValueAdapter,  JobUpdate {
      * @param command the command
      * @param properties properties in the update message.
      */
-    public JobUpdateImpl(@Nonnull Job job, @Nonnull JobUpdateCommand command, @Nonnull Map<String, Object> properties) {
+    public JobUpdateImpl(@NotNull Job job, @NotNull JobUpdateCommand command, @NotNull Map<String, Object> properties) {
         if ( job == null ) {
             throw new IllegalArgumentException("Job argument cant be null");
         }
@@ -91,14 +90,14 @@ public class JobUpdateImpl implements MapValueAdapter,  JobUpdate {
      * Create a JobUpdateImpl based on a inbound message in the form of a Map.
      * @param message a inbound message in map form.
      */
-    public JobUpdateImpl(@Nonnull Map<String, Object> message) {
+    public JobUpdateImpl(@NotNull Map<String, Object> message) {
         if ( message == null ) {
             throw new IllegalArgumentException("Message cant be null");
         }
         fromMapValue(message);
     }
 
-    public JobUpdateImpl(@Nonnull String jobId, @Nonnull JobUpdateCommand command) {
+    public JobUpdateImpl(@NotNull String jobId, @NotNull JobUpdateCommand command) {
         if ( jobId == null ) {
             throw new IllegalArgumentException("JobId argument cant be null");
         }
@@ -126,37 +125,37 @@ public class JobUpdateImpl implements MapValueAdapter,  JobUpdate {
         return expires;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Types.JobType getJobType() {
         return jobType;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public JobUpdateCommand getCommand() {
         return command;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Types.JobQueue getQueue() {
         return jobQueue;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public String getId() {
         return id;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Job.JobState getState() {
         return jobState;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Map<String, Object> getProperties() {
         return properties;
@@ -221,7 +220,7 @@ public class JobUpdateImpl implements MapValueAdapter,  JobUpdate {
     }
 
     @Override
-    @Nonnull
+    @NotNull
     public Object toMapValue() {
         final Map<String, Object> builder = new HashMap<>();
         builder.put("tp", jobQueue.toString());

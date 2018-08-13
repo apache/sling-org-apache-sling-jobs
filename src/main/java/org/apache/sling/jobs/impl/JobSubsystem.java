@@ -27,9 +27,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobBuilder;
 import org.apache.sling.jobs.JobCallback;
@@ -42,6 +39,8 @@ import org.apache.sling.jobs.impl.spi.JobStorage;
 import org.apache.sling.jobs.impl.storage.InMemoryJobStorage;
 import org.apache.sling.mom.QueueManager;
 import org.apache.sling.mom.TopicManager;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -94,31 +93,31 @@ public class JobSubsystem  implements JobManager, JobConsumer {
     }
 
     // --- Job Manager.
-    @Nonnull
+    @NotNull
     @Override
-    public JobBuilder newJobBuilder(@Nonnull Types.JobQueue queue, @Nonnull Types.JobType jobType) {
+    public JobBuilder newJobBuilder(@NotNull Types.JobQueue queue, @NotNull Types.JobType jobType) {
         return manager.newJobBuilder(queue, jobType);
     }
 
     @Nullable
     @Override
-    public Job getJobById(@Nonnull String jobId) {
+    public Job getJobById(@NotNull String jobId) {
         return manager.getJobById(jobId);
     }
 
     @Override
-    public void stopJobById(@Nonnull String jobId) {
+    public void stopJobById(@NotNull String jobId) {
         manager.stopJobById(jobId);
     }
 
     @Override
-    public boolean abortJob(@Nonnull String jobId) {
+    public boolean abortJob(@NotNull String jobId) {
         return manager.abortJob(jobId);
     }
 
     @Nullable
     @Override
-    public Job retryJobById(@Nonnull String jobId) {
+    public Job retryJobById(@NotNull String jobId) {
         return manager.retryJobById(jobId);
     }
 
@@ -147,9 +146,9 @@ public class JobSubsystem  implements JobManager, JobConsumer {
 
 
     // ------- job execution, invoked by JobQueueConsumerFactory.
-    @Nonnull
+    @NotNull
     @Override
-    public void execute(@Nonnull Job initialState, @Nonnull JobUpdateListener listener, @Nonnull JobCallback callback) {
+    public void execute(@NotNull Job initialState, @NotNull JobUpdateListener listener, @NotNull JobCallback callback) {
         // iterate over the entries. This should cause the entries to come out in natural key order
         // which should respect any priority applied to the Services via ServiceReference. (TODO: check that is the case)
         // TODO: add a Job controller to the job before executing.
@@ -205,7 +204,7 @@ public class JobSubsystem  implements JobManager, JobConsumer {
 
 
         @Override
-        public boolean accept(@Nonnull Types.JobType jobType) {
+        public boolean accept(@NotNull Types.JobType jobType) {
             if ( consumer instanceof JobTypeValve) {
                 return ((JobTypeValve) consumer).accept(jobType);
             }

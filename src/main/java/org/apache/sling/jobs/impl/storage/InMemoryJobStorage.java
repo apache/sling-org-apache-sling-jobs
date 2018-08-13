@@ -20,12 +20,11 @@ package org.apache.sling.jobs.impl.storage;
 
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.impl.spi.JobStorage;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * An unbounded local JVM job store.
  */
@@ -36,14 +35,14 @@ public class InMemoryJobStorage implements JobStorage {
 
     @Nullable
     @Override
-    public Job get(@Nonnull String jobId) {
+    public Job get(@NotNull String jobId) {
         check();
         return store.get(jobId);
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public Job put(@Nonnull Job job) {
+    public Job put(@NotNull Job job) {
         check();
         store.put(job.getId(), job);
         return job;
@@ -51,7 +50,7 @@ public class InMemoryJobStorage implements JobStorage {
 
     @Nullable
     @Override
-    public Job remove(@Nonnull String jobId) {
+    public Job remove(@NotNull String jobId) {
         check();
         Job j = store.get(jobId);
         store.remove(jobId);
@@ -60,7 +59,7 @@ public class InMemoryJobStorage implements JobStorage {
 
     @Nullable
     @Override
-    public Job remove(@Nonnull Job job) {
+    public Job remove(@NotNull Job job) {
         check();
         return remove(job.getId());
     }

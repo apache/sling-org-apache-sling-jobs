@@ -21,9 +21,8 @@ package org.apache.sling.jobs;
 
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
@@ -53,14 +52,14 @@ public interface Job {
      * The job queue. - immutable.
      * @return The job queue name
      */
-    @Nonnull
+    @NotNull
     Types.JobQueue getQueue();
 
     /**
      * Unique job ID. immutable.
      * @return The unique job ID.
      */
-    @Nonnull
+    @NotNull
     String getId();
 
 
@@ -69,13 +68,13 @@ public interface Job {
      * to accept.
      * @return the job type.
      */
-    @Nonnull
+    @NotNull
     Types.JobType getJobType();
 
     /**
      * @return a map of all properties.
      */
-    @Nonnull
+    @NotNull
     Map<String,Object> getProperties();
 
     /**
@@ -109,14 +108,14 @@ public interface Job {
      * Get the job state
      * @return the job state.
      */
-    @Nonnull
+    @NotNull
     JobState getJobState();
 
     /**
      * Set the new state.
      * @param newState the new state.
      */
-    void setState(@Nonnull JobState newState);
+    void setState(@NotNull JobState newState);
 
 
     /**
@@ -138,7 +137,7 @@ public interface Job {
      *
      * @return a Job update builder.
      */
-    @Nonnull
+    @NotNull
     JobUpdateBuilder newJobUpdateBuilder();
 
 
@@ -153,7 +152,7 @@ public interface Job {
      * Set the current job controller.
      * @param  jobController the job controller.
      */
-    void setJobController(@Nonnull JobController jobController);
+    void setJobController(@NotNull JobController jobController);
 
 
     /**

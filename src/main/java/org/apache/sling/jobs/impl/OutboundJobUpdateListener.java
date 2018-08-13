@@ -18,12 +18,11 @@
  */
 package org.apache.sling.jobs.impl;
 
-import javax.annotation.Nonnull;
-
 import org.apache.sling.jobs.JobUpdate;
 import org.apache.sling.jobs.JobUpdateListener;
 import org.apache.sling.mom.QueueManager;
 import org.apache.sling.mom.TopicManager;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Sends messages out to JMS Queues or topics. Normally called by the local JobManager Implementation.
@@ -48,7 +47,7 @@ public class OutboundJobUpdateListener implements JobUpdateListener {
 
 
     @Override
-    public void update(@Nonnull JobUpdate update) {
+    public void update(@NotNull JobUpdate update) {
         if ( active ) {
             switch(update.getCommand()) {
                 case START_JOB:
