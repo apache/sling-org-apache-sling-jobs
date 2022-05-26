@@ -21,13 +21,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.sling</groupId>
-        <artifactId>sling</artifactId>
-        <version>30</version>
+        <artifactId>sling-bundle-parent</artifactId>
+        <version>47</version>
         <relativePath />
     </parent>
 
     <artifactId>org.apache.sling.jobs</artifactId>
-    <packaging>bundle</packaging>
     <version>1.0.1-SNAPSHOT</version>
 
     <name>Apache Sling Jobs Support</name>
@@ -39,12 +38,14 @@
         <connection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-jobs.git</connection>
         <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/sling-org-apache-sling-jobs.git</developerConnection>
         <url>https://gitbox.apache.org/repos/asf?p=sling-org-apache-sling-jobs.git</url>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
+        <project.build.outputTimestamp>1</project.build.outputTimestamp>
         <site.jira.version.id>12315369</site.jira.version.id>
-        <sling.java.version>7</sling.java.version>
-        <exam.version>4.4.0</exam.version>
+        <sling.java.version>8</sling.java.version>
+        <exam.version>4.13.3</exam.version>
         <url.version>2.4.5</url.version>
         <bundle.build.dir>${basedir}/target</bundle.build.dir>
         <bundle.file.name>${bundle.build.dir}/${project.build.finalName}.jar</bundle.file.name>
@@ -56,13 +57,8 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>bnd-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -92,23 +88,29 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.component.annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.metatype.annotations</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.annotation.versioning</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>16.0.2</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.annotations</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>biz.aQute.bnd</groupId>
-            <artifactId>biz.aQute.bndlib</artifactId>
-            <scope>provided</scope>
-        </dependency>
+
       <!-- Testing -->
         <dependency>
             <groupId>junit</groupId>
@@ -123,13 +125,13 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.service.cm</artifactId>
-            <version>1.5.0</version>
+            <version>1.6.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.10.19</version>
+            <artifactId>mockito-core</artifactId>
+            <version>4.5.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

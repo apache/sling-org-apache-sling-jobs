@@ -19,7 +19,6 @@
 
 package org.apache.sling.jobs.impl;
 
-import aQute.libg.command.Command;
 import org.apache.sling.jobs.Job;
 import org.apache.sling.jobs.JobUpdate;
 import org.apache.sling.jobs.Types;
